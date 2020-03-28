@@ -14,7 +14,7 @@ import java.util.Scanner;
 public class NioClient {
 
     /**
-     * 启动
+     * 启动客户端的方法
      */
     public void start(String nickname) throws IOException {
         /**
@@ -24,13 +24,14 @@ public class NioClient {
                 new InetSocketAddress("127.0.0.1", 8000));
 
         /**
-         * 接收服务器端响应
+         * 接收服务器端
          */
         // 新开线程，专门负责来接收服务器端的响应数据
         // selector ， socketChannel ， 注册
         Selector selector = Selector.open();
         socketChannel.configureBlocking(false);
         socketChannel.register(selector, SelectionKey.OP_READ);
+        //将selector传入给线程，轮询
         new Thread(new NioClientHandler(selector)).start();
 
         /**
@@ -40,6 +41,7 @@ public class NioClient {
         while (scanner.hasNextLine()) {
             String request = scanner.nextLine();
             if (request != null && request.length() > 0) {
+                //发送的是byte[]数组，仍然需要编解码
                 socketChannel.write(
                         Charset.forName("UTF-8")
                                 .encode(nickname + " : " + request));
@@ -48,8 +50,5 @@ public class NioClient {
 
     }
 
-    public static void main(String[] args) throws IOException {
-//        new NioClient().start();
-    }
 
 }

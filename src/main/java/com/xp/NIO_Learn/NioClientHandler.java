@@ -23,7 +23,7 @@ public class NioClientHandler implements Runnable {
     public void run() {
 
         try {
-            for (;;) {
+            while(true) {
                 int readyChannels = selector.select();
 
                 if (readyChannels == 0) continue;
