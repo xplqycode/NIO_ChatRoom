@@ -14,6 +14,7 @@ import java.util.Set;
  */
 public class NioClientHandler implements Runnable {
     private Selector selector;
+    //测试一下分支合并
 
     public NioClientHandler(Selector selector) {
         this.selector = selector;
