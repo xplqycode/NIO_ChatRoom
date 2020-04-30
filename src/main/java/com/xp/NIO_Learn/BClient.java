@@ -3,8 +3,7 @@ package com.xp.NIO_Learn;
 import java.io.IOException;
 
 /**
- * 测试一下分支上传
- * ceshi
+ * test branch
  */
 public class BClient {
 
